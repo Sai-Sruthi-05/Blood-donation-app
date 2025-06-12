@@ -4,16 +4,113 @@
   <meta charset="UTF-8" />
   <title>Register | BloodConnect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    :root {
+      --medium-red: #e63946;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffffff, #fff5f5);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      position: relative;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px var(--shadow);
+      width: 100%;
+      max-width: 450px;
+      border: 1px solid var(--medium-red);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 8px;
+      background: var(--medium-red);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--medium-red);
+      margin-bottom: 25px;
+      margin-top: 0;
+      font-weight: 600;
+    }
+
+    form {
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-field {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 15px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Segoe UI', sans-serif;
+      box-sizing: border-box;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .form-field:focus {
+      border-color: var(--medium-red);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+    }
+
+    select.form-field {
+      appearance: none;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: 40px; /* To avoid overlap with arrow */
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #e63946, #d62828);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(230, 57, 70, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(230, 57, 70, 0.35);
+    }
+  </style>
 </head>
 <body>
   <div class="card">
     <h2>Register</h2>
-    <form>
-      <input type="text" placeholder="Full Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <select required>
+    <form action="#" method="POST">
+      <input type="text" name="fullname" class="form-field" placeholder="Full Name" required />
+      <input type="email" name="email" class="form-field" placeholder="Email" required />
+      <input type="password" name="password" class="form-field" placeholder="Password" required />
+      <select name="role" class="form-field" required>
         <option value="">Select Role</option>
         <option value="donor">Donor</option>
         <option value="patient">Patient</option>
