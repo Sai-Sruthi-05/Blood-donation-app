@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodConnect</title>
+  <link rel="stylesheet" href="css2/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<header>
+  <div class="header-section left">
+  <button onclick="switchRole('donor')">Donor</button>
+  <button onclick="switchRole('patient')">Patient</button>
+</div>
+
+
+  <div class="header-title">
+    <span>Blood Connect</span>
+  </div>
+
+  <div class="header-section right">
+    <button onclick="location.href='login.html'">Login</button>
+    <button onclick="location.href='register.html'">Register</button>
+  </div>
+</header>
+
+ <div id="request-form" class="form-section" style="display:none;">
+  <h2>Request Blood</h2>
+  <form onsubmit="submitRequest(event)">
+    <input type="text" id="patientName" placeholder="Your Name" required />
+    <input type="text" id="bloodGroup" placeholder="Blood Group (e.g. B+)" required />
+    <input type="text" id="location" placeholder="City / Location" required />
+    <button type="submit">Submit Request</button>
+  </form>
+</div>
+ 
+
+  <div class="slider">
+    <div class="slide fade">
+      <img src="images/image2.jpg" alt="Patient 1">
+      <div class="caption">"Access to timely transfusion saves lives – let's ensure every drop counts."</div>
+    </div>
+    <div class="slide fade">
+      <img src="images/unsplash1.jpg" alt="Patient 2">
+      <div class="caption">"Thalassemia warriors need us – be a part of their story."</div>
+    </div>
+    <div class="slide fade">
+      <img src="images/image3.jpg" alt="Patient 3">
+      <div class="caption">"Every 3 weeks, a child with thalassemia needs blood. Let’s be the reason they smile."</div>
+    </div>
+  </div>
+
+  <div class="center-title">💉 Thalassemia Patients</div>
+
+  <div class="dashboard-container">
+    <div class="card">
+      <h3><i class="fas fa-user-injured"></i> Patient Records</h3>
+      <p>Maintain comprehensive details for each Thalassemia patient including transfusion history, donor matching, and blood group.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-hospital-symbol"></i> Blood Bank Integration</h3>
+      <p>Link directly with Rakthkosh or similar systems for quick availability of required blood units.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-calendar-check"></i> Transfusion Schedule</h3>
+      <p>Set and track transfusion appointments for patients, receive reminders and maintain logs.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-heartbeat"></i> Health Monitoring</h3>
+      <p>Track vital stats, hemoglobin levels, and doctor feedback for continuous care.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-user-md"></i> Doctor/Volunteer Panel</h3>
+      <p>Secure login for medical staff and volunteers to manage appointments, prescriptions and patient status.</p>
+    </div>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+    const showSlides = () => {
+      let slides = document.getElementsByClassName("slide");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1; }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 4000); // Change every 4 seconds
+    };
+    window.onload = showSlides;
+  </script>
+  <script>
+  function switchRole(role) {
+    const requestForm = document.getElementById('request-form');
+    if (role === 'patient') {
+      requestForm.style.display = 'block';
+    } else {
+      requestForm.style.display = 'none';
+    }
+  }
+
+  function submitRequest(e) {
+    e.preventDefault();
+    const data = {
+      name: document.getElementById('patientName').value,
+      bloodGroup: document.getElementById('bloodGroup').value,
+      location: document.getElementById('location').value,
+      notes: document.getElementById('notes').value,
+    };
+
+    // Example POST request (you can connect this to your API)
+    console.log("Submitting request:", data);
+    alert("Blood request submitted!");
+  }
+</script>
+
+</body>
+
+</html>
