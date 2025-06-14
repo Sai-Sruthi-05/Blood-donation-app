@@ -117,6 +117,68 @@
     alert("Blood request submitted!");
   }
 </script>
+<script>
+  function toggleChat() {
+    const chat = document.getElementById("chatPopup");
+    chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+  }
+
+  function handleKey(e) {
+    if (e.key === "Enter") {
+      const input = document.getElementById("userInput");
+      const msg = input.value.trim();
+      if (msg) {
+        appendMessage("You", msg);
+        input.value = "";
+
+        // Simulate bot reply (static for now)
+        setTimeout(() => {
+          appendMessage("Bot", "I'm just a static bot for now. Integration coming soon!");
+        }, 500);
+      }
+    }
+  }
+
+  function appendMessage(sender, text) {
+    const chat = document.getElementById("chatBody");
+    const p = document.createElement("p");
+    p.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    chat.appendChild(p);
+    chat.scrollTop = chat.scrollHeight;
+  }
+</script>
+
+
+<!-- Chatbot UI -->
+<!-- 🌐 Multilingual + Chatbot -->
+<div class="chatbot-container">
+  <button class="chat-toggle-btn" onclick="toggleChat()">💬 Chat</button>
+
+  <div id="chatPopup" class="chat-popup">
+    <div class="chat-header">
+      <h4>🤖 ThalaBot</h4>
+      <button onclick="toggleChat()">✖</button>
+    </div>
+
+    <!-- 🌐 Language Selector -->
+    <div class="lang-select">
+      <label for="lang">🌐 Language:</label>
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="te">తెలుగు</option>
+        <option value="ta">தமிழ்</option>
+      </select>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <p><strong>Bot:</strong> Hello! How can I assist you today?</p>
+    </div>
+
+    <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleKey(event)" />
+  </div>
+</div>
+
 
 </body>
 
