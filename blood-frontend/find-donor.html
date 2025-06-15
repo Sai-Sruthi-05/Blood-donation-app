@@ -121,7 +121,7 @@
       margin-top: 3rem;
       margin-bottom: 1rem;
     }
-
+    
     .donor-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -129,6 +129,7 @@
       max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1rem;
+      margin-bottom: 3rem;
     }
 
     .donor-card {
@@ -137,12 +138,59 @@
       justify-content: space-between;
       background: #fff;
       border-left: 5px solid var(--medium-red);
-      padding: 1.5rem;
+      border-right: 5px solid var(--medium-red);
+      padding:  1.5rem;
+      
       border-radius: 12px;
       box-shadow: 0 4px 12px var(--shadow);
       height: 100%;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
+    .center-title{
+      margin-top: 5rem;
+      font-size: 1.6rem;
+      color: var(--dark-red);
+      font-weight: bold;
+    }
+  .send-alert-box {
+  width: 80%;
+  max-width: 800px;
+  margin: 2rem auto 2rem auto; /* ↑ increased top margin */
+  padding: 2rem;
+  background-color: #fff0f0;
+  border: 2px dashed var(--medium-red);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px var(--shadow);
+  text-align: center;
+}
+
+.send-alert-box textarea {
+  width: 80%;
+  height: 100px;
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.send-alert-box button {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background-color: var(--red);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.send-alert-box button:hover {
+  background-color: var(--dark-red);
+}
+
 
     .donor-card:hover {
       transform: translateY(-4px);
@@ -179,13 +227,18 @@
   <main>
     <form class="donor-search-form">
       <input type="text" placeholder="Enter Location" />
-      <select>
+            <select>
         <option value="">Select Blood Group</option>
         <option value="A+">A+</option>
+        <option value="A-">A-</option>
         <option value="B+">B+</option>
+        <option value="B-">B-</option>
         <option value="O+">O+</option>
+        <option value="O-">O-</option>
         <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
       </select>
+
       <button type="submit">Search</button>
     </form>
 
@@ -219,6 +272,42 @@
         <p>Last Donated: 15 days ago</p>
       </div>
     </div>
+    <div class="center-title">Send Alert to Donors</div>
+
+
+    <div class="send-alert-box">
+      <form onsubmit="sendAlert(event)">
+        <textarea placeholder="Enter emergency alert message..." required></textarea><br />
+        <button type="submit">Send Alert</button>
+      </form>
+      <p id="alert-status" style="color: green; font-weight: bold; margin-top: 10px;"></p>
+    </div>
+    <script>
+          function sendAlert(e) {
+          e.preventDefault();
+          const msg = document.querySelector('.send-alert-box textarea').value;
+          const status = document.getElementById('alert-status');
+          
+          if (msg.trim() !== "") {
+            status.style.color = "#555";
+            status.innerText = "Sending alert...";
+            
+            setTimeout(() => {
+              status.style.color = "green";
+              status.innerText = "✅ Alert sent to 5 nearby donors!";
+              console.log("Simulated message:", msg);
+              document.querySelector('.send-alert-box textarea').value = "";
+              
+              setTimeout(() => {
+                status.innerText = "";
+              }, 3000);
+            }, 2000); // simulate network delay
+          }
+        }
+
+</script>
+
+
   </main>
 </body>
 </html>
